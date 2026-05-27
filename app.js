@@ -3,7 +3,7 @@ btnPaper = document.getElementById("btnPaper");
 btnScissor = document.getElementById("btnScissor");
 result = document.getElementById("result");
 
-let history;
+let history = [];
 
 
 function generateRandom() {
@@ -64,6 +64,28 @@ function incrementHistory(playerChoice, random, result) {
     history.push(item);
 }
 
+function renderHistory() {
+
+    const historyDiv = document.getElementById('history');
+    historyDiv.innerHTML = '';
+
+    if (history.length === 0) {
+        const empty = document.createElement('p');
+        empty.textContent = "Nenhum Histórico Ainda.";
+        historyDiv.appendChild(empty);
+        return;
+    }
+
+    history.forEach(item => {
+
+        const p = document.createElement('p');
+        p.textContent = `Você: ${item.playerChoice} | PC: ${item.random} | ${item.result}`;
+        historyDiv.appendChild(p);
+
+    })
+
+}
+
 function showResult(playerChoice) {
 
     const random = generateRandom();
@@ -74,6 +96,7 @@ function showResult(playerChoice) {
     result.textContent = calculeResult(playerChoice, random);
 
     incrementHistory(playerChoice, random, calculeResult(playerChoice, random));
+    renderHistory();
 }
 btnPaper.addEventListener("click", () => showResult('Papel'));
 btnRock.addEventListener("click", () => showResult('Pedra'));
