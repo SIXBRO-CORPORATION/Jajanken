@@ -11,6 +11,8 @@ let placarJogador = 0
 let placarCpu = 0
 let placarDraw = 0
 let rodadaGlobal = 0
+let history = [];
+
 
 function generateRandom() {
 
@@ -35,6 +37,43 @@ function calculeResult(playerChoice, random) {
     else {
         return results[2]
     }
+}
+
+function incrementHistory(playerChoice, random, result) {
+
+    if (history.length >= 10) {
+        history.shift();
+    }
+
+    const item = {
+        playerChoice: playerChoice,
+        random: random,
+        result: result
+    }
+
+    history.push(item);
+}
+
+function renderHistory() {
+
+    const historyDiv = document.getElementById('history');
+    historyDiv.innerHTML = '';
+
+    if (history.length === 0) {
+        const empty = document.createElement('p');
+        empty.textContent = "Nenhum Histórico Ainda.";
+        historyDiv.appendChild(empty);
+        return;
+    }
+
+    history.forEach(item => {
+
+        const p = document.createElement('p');
+        p.textContent = `Você: ${item.playerChoice} | PC: ${item.random} | ${item.result}`;
+        historyDiv.appendChild(p);
+
+    })
+
 }
 
 function showResult(playerChoice) {
@@ -75,7 +114,11 @@ function reset(){
     result.textContent = ""
     atualizarPlacar();
 }
+    result.textContent = calculeResult(playerChoice, random);
 
+    incrementHistory(playerChoice, random, calculeResult(playerChoice, random));
+    renderHistory();
+}
 btnPaper.addEventListener("click", () => showResult('Papel'));
 btnRock.addEventListener("click", () => showResult('Pedra'));
 btnScissor.addEventListener("click", () => showResult('Tesoura'));
