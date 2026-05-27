@@ -24,43 +24,16 @@ function calculeResult(playerChoice, random) {
 
     const results = ['Vitória', 'Empate', 'Derrota']
 
-    if (playerChoice === 'Pedra') {
-        if (random === 'Papel') {
-            placarCpu++
-            return results[2];
-        } else if (random === 'Tesoura') {
-            placarJogador++
-            return results[0];
-        } else {
-            placarDraw++
-            return results[1];
-        }
+    if (playerChoice === random) {
+    return results[1]
     }
-
-    if (playerChoice === 'Papel') {
-        if (random === 'Papel') {
-            placarDraw++
-            return results[1];
-        } else if (random === 'Tesoura') {
-            placarCpu++
-            return results[2];
-        } else {
-            placarJogador++
-            return results[0];
-        }
+    if ((playerChoice === "Pedra" && random === "Tesoura") ||
+        (playerChoice === "Papel" && random === "Pedra") ||
+        (playerChoice === "Tesoura" && random === "Papel")) {
+        return results[0]
     }
-
-    if (playerChoice === 'Tesoura') {
-        if (random === 'Papel') {
-            placarJogador++
-            return results[0];
-        } else if (random === 'Tesoura') {
-            placarDraw++
-            return results[1];
-        } else {
-            placarCpu++
-            return results[2];
-        }
+    else {
+        return results[2]
     }
 }
 
@@ -71,8 +44,18 @@ function showResult(playerChoice) {
     console.log(random);
     console.log(playerChoice);
 
-    result.textContent = calculeResult(playerChoice, random);
+    const resultado = calculeResult(playerChoice, random);
+    if (resultado === "Vitória"){
+        placarJogador++;
+    }
+    else if (resultado === "Empate"){
+        placarDraw++
+    }
+    else {
+        placarCpu++;
+    }
     rodadaGlobal++
+    result.textContent = resultado;
     atualizarPlacar()
 
 }
@@ -89,6 +72,7 @@ function reset(){
     placarCpu = 0;
     placarDraw = 0;
     rodadaGlobal = 0;
+    result.textContent = ""
     atualizarPlacar();
 }
 
