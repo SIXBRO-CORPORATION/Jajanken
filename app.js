@@ -1,4 +1,7 @@
-
+btnRock = document.getElementById("btnRock");
+btnPaper = document.getElementById("btnPaper");
+btnScissor = document.getElementById("btnScissor");
+result = document.getElementById("result");
 
 
 function generateRandom() {
@@ -9,7 +12,7 @@ function generateRandom() {
 
 }
 
-function showResult(playerChoice, random) {
+function calculeResult(playerChoice, random) {
 
     const results = ['Vitória', 'Empate', 'Derrota']
 
@@ -43,5 +46,20 @@ function showResult(playerChoice, random) {
         }
     }
 }
+
+function showResult(playerChoice) {
+
+    const random = generateRandom();
+
+    console.log(random);
+    console.log(playerChoice);
+
+    result.textContent = calculeResult(playerChoice, random);
+}
+
+btnPaper.addEventListener("click", () => showResult('Papel'));
+btnRock.addEventListener("click", () => showResult('Pedra'));
+btnScissor.addEventListener("click", () => showResult('Tesoura'));
+
 
 
