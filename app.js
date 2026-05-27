@@ -3,6 +3,8 @@ btnPaper = document.getElementById("btnPaper");
 btnScissor = document.getElementById("btnScissor");
 result = document.getElementById("result");
 
+let history;
+
 
 function generateRandom() {
 
@@ -47,6 +49,21 @@ function calculeResult(playerChoice, random) {
     }
 }
 
+function incrementHistory(playerChoice, random, result) {
+
+    if (history.length >= 10) {
+        history.shift();
+    }
+
+    const item = {
+        playerChoice: playerChoice,
+        random: random,
+        result: result
+    }
+
+    history.push(item);
+}
+
 function showResult(playerChoice) {
 
     const random = generateRandom();
@@ -55,8 +72,9 @@ function showResult(playerChoice) {
     console.log(playerChoice);
 
     result.textContent = calculeResult(playerChoice, random);
-}
 
+    incrementHistory(playerChoice, random, calculeResult(playerChoice, random));
+}
 btnPaper.addEventListener("click", () => showResult('Papel'));
 btnRock.addEventListener("click", () => showResult('Pedra'));
 btnScissor.addEventListener("click", () => showResult('Tesoura'));
