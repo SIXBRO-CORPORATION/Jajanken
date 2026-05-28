@@ -10,7 +10,6 @@ btnReset = document.getElementById("btnReset");
 let placarJogador = 0
 let placarCpu = 0
 let placarDraw = 0
-let rodadaGlobal = 0
 let history = [];
 
 
@@ -103,9 +102,8 @@ function showResult(playerChoice) {
 }
 
 function atualizarPlacar() {
-    document.getElementById('placar-global').textContent =  "Total de rodadas: " + rodadaGlobal;
-    document.getElementById('placar-jogador').textContent = "Pontos do jogador: " + placarJogador;
-    document.getElementById('placar-cpu').textContent = "Pontos do Gon: " + placarCpu;
+    document.getElementById('placar-jogador').textContent = "Total de pontos do jogador: " + placarJogador;
+    document.getElementById('placar-cpu').textContent = "Total de pontos do Gon: " + placarCpu;
     document.getElementById('placar-empate').textContent = "Total de empates: " + placarDraw;
 }
 
@@ -113,10 +111,11 @@ function reset() {
     placarJogador = 0;
     placarCpu = 0;
     placarDraw = 0;
-    rodadaGlobal = 0;
     result.textContent = ""
     atualizarPlacar();
 }
+
+
 btnPaper.addEventListener("click", () => showResult('Papel'));
 btnRock.addEventListener("click", () => showResult('Pedra'));
 btnScissor.addEventListener("click", () => showResult('Tesoura'));
