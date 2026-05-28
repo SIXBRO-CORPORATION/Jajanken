@@ -6,6 +6,7 @@ infomodo = document.getElementById("infomodo");
 btnFree = document.getElementById("free");
 resultSerie = document.getElementById("result-serie");
 btnReset = document.getElementById("btnReset");
+historyDiv = document.getElementById('history');
 
 let placarJogador = 0
 let placarCpu = 0
@@ -54,9 +55,13 @@ function incrementHistory(playerChoice, random, result) {
     history.push(item);
 }
 
+function clearHistory() {
+    history = [];
+    renderHistory();
+}
+
 function renderHistory() {
 
-    const historyDiv = document.getElementById('history');
     historyDiv.innerHTML = '';
 
     if (history.length === 0) {
@@ -113,6 +118,7 @@ function reset() {
     placarDraw = 0;
     result.textContent = ""
     atualizarPlacar();
+    clearHistory();
 }
 
 btnPaper.addEventListener("click", () => showResult('Papel'));
