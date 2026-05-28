@@ -28,11 +28,6 @@ const gameMode = ['normal', '3', '5'];
 
 const EMOJIS  = { Pedra: '✊', Papel: '✋', Tesoura: '✌️' };
 
-
-function initMelhorDe3() {
-    reset();
-}
-
 function neededToWin() {
     if (mode === gameMode[1]) return 2;
     if (mode === gameMode[2]) return 3;
