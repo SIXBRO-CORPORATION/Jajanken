@@ -95,6 +95,9 @@ function showResult(playerChoice) {
     }
     rodadaGlobal++
     result.textContent = resultado;
+
+    incrementHistory(playerChoice, random, resultado);
+    renderHistory();
     atualizarPlacar()
 
 }
@@ -106,18 +109,13 @@ function atualizarPlacar() {
     document.getElementById('placar-empate').textContent = "Empate: " + placarDraw;
 }
 
-function reset(){
+function reset() {
     placarJogador = 0;
     placarCpu = 0;
     placarDraw = 0;
     rodadaGlobal = 0;
     result.textContent = ""
     atualizarPlacar();
-}
-    result.textContent = calculeResult(playerChoice, random);
-
-    incrementHistory(playerChoice, random, calculeResult(playerChoice, random));
-    renderHistory();
 }
 btnPaper.addEventListener("click", () => showResult('Papel'));
 btnRock.addEventListener("click", () => showResult('Pedra'));
