@@ -10,6 +10,7 @@ btnReset = document.getElementById("btnReset");
 let placarJogador = 0
 let placarCpu = 0
 let placarDraw = 0
+let rodadaGlobal = 0
 let history = [];
 
 
@@ -92,7 +93,6 @@ function showResult(playerChoice) {
     else {
         placarCpu++;
     }
-    rodadaGlobal++
     result.textContent = resultado;
 
     incrementHistory(playerChoice, random, resultado);
@@ -104,7 +104,7 @@ function showResult(playerChoice) {
 function atualizarPlacar() {
     document.getElementById('placar-jogador').textContent = "Total de pontos do jogador: " + placarJogador;
     document.getElementById('placar-cpu').textContent = "Total de pontos do Gon: " + placarCpu;
-    document.getElementById('placar-empate').textContent = "Total de empates: " + placarDraw;
+    document.getElementById('placar-empate').textContent = "Total Empate: " + placarDraw;
 }
 
 function reset() {
@@ -114,7 +114,6 @@ function reset() {
     result.textContent = ""
     atualizarPlacar();
 }
-
 
 btnPaper.addEventListener("click", () => showResult('Papel'));
 btnRock.addEventListener("click", () => showResult('Pedra'));
