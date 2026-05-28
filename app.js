@@ -103,10 +103,10 @@ function showResult(playerChoice) {
 }
 
 function atualizarPlacar() {
-    document.getElementById('placar-global').textContent =  "Global: " + rodadaGlobal;
-    document.getElementById('placar-jogador').textContent = "Jogador: " + placarJogador;
-    document.getElementById('placar-cpu').textContent = "Cpu: " + placarCpu;
-    document.getElementById('placar-empate').textContent = "Empate: " + placarDraw;
+    document.getElementById('placar-global').textContent =  "Total de rodadas: " + rodadaGlobal;
+    document.getElementById('placar-jogador').textContent = "Pontos do jogador: " + placarJogador;
+    document.getElementById('placar-cpu').textContent = "Pontos do Gon: " + placarCpu;
+    document.getElementById('placar-empate').textContent = "Total de empates: " + placarDraw;
 }
 
 function reset() {
