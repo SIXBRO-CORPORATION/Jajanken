@@ -18,9 +18,7 @@ let placarCpu = 0
 let placarDraw = 0
 let serieJogador = 0;
 let serieCpu = 0;
-let rodadaGlobal = 0
 let history = [];
-let rounds = 1;
 let locked = false;
 let mode = 'normal';
 

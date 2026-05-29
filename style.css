@@ -1,0 +1,254 @@
+﻿:root {
+    --bg: #f3f4f6;
+    --surface: #ffffff;
+    --text: #111827;
+    --muted: #4b5563;
+    --border: #d1d5db;
+    --button-bg: #eef2f6;
+    --button-bg-hover: #e5eaf1;
+    --shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.45;
+}
+
+.container {
+    max-width: 680px;
+    margin: 32px auto;
+    padding: 0 16px 24px;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    margin: 0 0 6px;
+    font-size: 1.8rem;
+}
+
+.header p {
+    margin: 0;
+    color: var(--muted);
+}
+
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow);
+}
+
+h2 {
+    margin: 0 0 10px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+p {
+    margin: 6px 0;
+}
+
+.muted {
+    color: var(--muted);
+}
+
+.button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+button {
+    border: 1px solid var(--border);
+    background: var(--button-bg);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+button:hover {
+    background: var(--button-bg-hover);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+#btnReset {
+    width: 100%;
+}
+
+.history-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.icon {
+    font-size: 1.1rem;
+    color: var(--muted);
+}
+
+#history-list {
+    display: grid;
+    gap: 8px;
+}
+
+.history-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 8px 10px;
+}
+
+.history-item.win {
+    border-left: 4px solid #16a34a;
+}
+
+.history-item.draw {
+    border-left: 4px solid #d97706;
+}
+
+.history-item.lose {
+    border-left: 4px solid #dc2626;
+}
+
+.history-main {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #1f2937;
+    font-size: 0.93rem;
+}
+
+.history-result {
+    font-size: 0.82rem;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+}
+
+.history-result.win {
+    color: #166534;
+    background: #ecfdf3;
+    border-color: #bbf7d0;
+}
+
+.history-result.draw {
+    color: #92400e;
+    background: #fff7ed;
+    border-color: #fed7aa;
+}
+
+.history-result.lose {
+    color: #991b1b;
+    background: #fef2f2;
+    border-color: #fecaca;
+}
+
+.history-empty {
+    color: var(--muted);
+    margin: 2px 0 0;
+}
+
+.history-round-icon.win,
+.history-result .icon.win {
+    color: #166534;
+}
+
+.history-round-icon.draw,
+.history-result .icon.draw {
+    color: #92400e;
+}
+
+.history-round-icon.lose,
+.history-result .icon.lose {
+    color: #991b1b;
+}
+
+@media (max-width: 520px) {
+    .container {
+        margin-top: 20px;
+    }
+
+    .header h1 {
+        font-size: 1.5rem;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .history-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+#result.result-highlight {
+    display: inline-block;
+    font-size: 1.05rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+}
+
+#result.result-highlight.win {
+    color: #166534;
+    background: #ecfdf3;
+    border-color: #bbf7d0;
+}
+
+#result.result-highlight.draw {
+    color: #92400e;
+    background: #fff7ed;
+    border-color: #fed7aa;
+}
+
+#result.result-highlight.lose {
+    color: #991b1b;
+    background: #fef2f2;
+    border-color: #fecaca;
+}
+
+#result-serie.result-highlight {
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+}
+
+#result-serie.result-highlight.win {
+    color: #166534;
+    background: #ecfdf3;
+    border-color: #bbf7d0;
+}
+
+#result-serie.result-highlight.lose {
+    color: #991b1b;
+    background: #fef2f2;
+    border-color: #fecaca;
+}
+

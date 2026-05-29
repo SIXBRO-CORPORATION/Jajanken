@@ -1,37 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jajanken</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300,0,0" />
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Jajanken</h1>
-    <h2>Modo de Jogo:</h2>
-    <div>
-        <button id="btnNormalMode">Normal</button>
-        <button id="btn3Mode">Melhor de 3</button>
-        <button id="btn5Mode">Melhor de 5</button>
-    </div>
+    <main class="container">
+        <header class="header">
+            <h1>Jajanken</h1>
+            <p>Pedra, papel e tesoura em um layout simples.</p>
+        </header>
 
-    <p id="placar-jogador">Total de pontos do jogador: 0</p>
-    <p id="placar-empate">Total de empates: 0</p>
-    <p id="placar-cpu">Total de pontos do Gon: 0</p>
+        <section class="card">
+            <h2>Modo de jogo</h2>
+            <div class="button-row">
+                <button id="btnNormalMode">Normal</button>
+                <button id="btn3Mode">Melhor de 3</button>
+                <button id="btn5Mode">Melhor de 5</button>
+            </div>
+        </section>
 
-    <p id="serie-info"></p>
+        <section class="card">
+            <h2>Placar</h2>
+            <div class="score-list">
+                <p id="placar-jogador">Total de pontos do jogador: 0</p>
+                <p id="placar-empate">Total de empates: 0</p>
+                <p id="placar-cpu">Total de pontos do Gon: 0</p>
+            </div>
+            <p id="serie-info" class="muted"></p>
+        </section>
 
-    <button id="btnRock">Pedra</button>
-    <button id="btnPaper">Papel</button>
-    <button id="btnScissor">Tesoura</button>
+        <section class="card">
+            <h2>Jogada</h2>
+            <div class="button-row">
+                <button id="btnRock">Pedra</button>
+                <button id="btnPaper">Papel</button>
+                <button id="btnScissor">Tesoura</button>
+            </div>
+        </section>
 
-    <p id="result"></p>
-    <p id="result-sub"></p>
-    <p id="result-serie"></p>
+        <section class="card">
+            <h2>Resultado</h2>
+            <p id="result"></p>
+            <p id="result-sub" class="muted"></p>
+            <p id="result-serie" class="muted"></p>
+        </section>
 
-    <button id="btnReset">Reset</button>
+        <section class="card">
+            <button id="btnReset">Reset</button>
+        </section>
 
-    <div id="history">
-        <p>Nenhum Histórico Ainda.</p>
-    </div>
+        <section id="history" class="card">
+            <h2 class="history-title">
+                <span class="material-symbols-rounded icon">history</span>
+                Histórico
+            </h2>
+            <div id="history-list">
+                <p class="history-empty">Nenhum histórico ainda.</p>
+            </div>
+        </section>
+    </main>
 
     <script src="app.js"></script>
 </body>
