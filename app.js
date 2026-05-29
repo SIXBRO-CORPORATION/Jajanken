@@ -1,30 +1,27 @@
-btnRock = document.getElementById("btnRock");
+﻿btnRock = document.getElementById("btnRock");
 btnPaper = document.getElementById("btnPaper");
 btnScissor = document.getElementById("btnScissor");
 result = document.getElementById("result");
-infomodo = document.getElementById("infomodo");
-btnFree = document.getElementById("free");
 resultSerie = document.getElementById("result-serie");
 btnReset = document.getElementById("btnReset");
-historyDiv = document.getElementById('history');
+historyDiv = document.getElementById("history-list");
 btnNormalMode = document.getElementById("btnNormalMode");
 btn3Mode = document.getElementById("btn3Mode");
 btn5Mode = document.getElementById("btn5Mode");
 resultSub = document.getElementById("result-sub");
 serieInfo = document.getElementById("serie-info");
 
-let placarJogador = 0
-let placarCpu = 0
-let placarDraw = 0
+let placarJogador = 0;
+let placarCpu = 0;
+let placarDraw = 0;
 let serieJogador = 0;
 let serieCpu = 0;
 let history = [];
 let locked = false;
-let mode = 'normal';
+let mode = "normal";
 
-const gameMode = ['normal', '3', '5'];
-
-const EMOJIS  = { Pedra: '✊', Papel: '✋', Tesoura: '✌️' };
+const gameMode = ["normal", "3", "5"];
+const EMOJIS = { Pedra: "✊", Papel: "✋", Tesoura: "✌️" };
 
 function neededToWin() {
     if (mode === gameMode[1]) return 2;
@@ -33,43 +30,26 @@ function neededToWin() {
 }
 
 function generateRandom() {
-
-    const possibleRandom = ['Pedra', 'Papel', 'Tesoura'];
-
+    const possibleRandom = ["Pedra", "Papel", "Tesoura"];
     return possibleRandom[Math.floor(Math.random() * possibleRandom.length)];
-
 }
 
 function calculeResult(playerChoice, random) {
-
-    const results = ['Vitória', 'Empate', 'Derrota']
-
-    if (playerChoice === random) {
-    return results[1]
-    }
-    if ((playerChoice === "Pedra" && random === "Tesoura") ||
-        (playerChoice === "Papel" && random === "Pedra") ||
-        (playerChoice === "Tesoura" && random === "Papel")) {
-        return results[0]
-    }
-    else {
-        return results[2]
-    }
+    const results = ["Vitória", "Empate", "Derrota"];
+    if (playerChoice === random) return results[1];
+    if ((playerChoice === "Pedra" && random === "Tesoura") || (playerChoice === "Papel" && random === "Pedra") || (playerChoice === "Tesoura" && random === "Papel")) return results[0];
+    return results[2];
 }
 
-function incrementHistory(playerChoice, random, result) {
+function resultInfo(resultText) {
+    if (resultText === "Vitória") return { label: "Vitória", className: "win", icon: "military_tech", roundIcon: "mood" };
+    if (resultText === "Empate") return { label: "Empate", className: "draw", icon: "balance", roundIcon: "hourglass_empty" };
+    return { label: "Derrota", className: "lose", icon: "dangerous", roundIcon: "sentiment_dissatisfied" };
+}
 
-    if (history.length >= 10) {
-        history.shift();
-    }
-
-    const item = {
-        playerChoice: playerChoice,
-        random: random,
-        result: result
-    }
-
-    history.push(item);
+function incrementHistory(playerChoice, random, resultText) {
+    if (history.length >= 10) history.shift();
+    history.push({ playerChoice, random, result: resultText });
 }
 
 function clearHistory() {
@@ -78,42 +58,52 @@ function clearHistory() {
 }
 
 function renderHistory() {
-
-    historyDiv.innerHTML = '';
+    historyDiv.innerHTML = "";
 
     if (history.length === 0) {
-        const empty = document.createElement('p');
-        empty.textContent = "Nenhum Histórico Ainda.";
+        const empty = document.createElement("p");
+        empty.className = "history-empty";
+        empty.textContent = "Nenhum histórico ainda.";
         historyDiv.appendChild(empty);
         return;
     }
 
-    history.forEach(item => {
+    history.forEach((item) => {
+        const info = resultInfo(item.result);
 
-        const p = document.createElement('p');
-        p.textContent = `Você: ${item.playerChoice} | PC: ${item.random} | ${item.result}`;
-        historyDiv.prepend(p);
+        const row = document.createElement("div");
+        row.className = `history-item ${info.className}`;
 
-    })
+        const main = document.createElement("div");
+        main.className = "history-main";
+        main.innerHTML = `
+            <span class="material-symbols-rounded icon history-round-icon ${info.className}">${info.roundIcon}</span>
+            <span>Você: ${EMOJIS[item.playerChoice]} ${item.playerChoice} | Gon: ${EMOJIS[item.random]} ${item.random}</span>
+        `;
 
+        const resultBadge = document.createElement("span");
+        resultBadge.className = `history-result ${info.className}`;
+        resultBadge.innerHTML = `<span class="material-symbols-rounded icon ${info.className}">${info.icon}</span> ${info.label}`;
+
+        row.appendChild(main);
+        row.appendChild(resultBadge);
+        historyDiv.prepend(row);
+    });
 }
 
 function atualizarPlacar() {
-    document.getElementById('placar-jogador').textContent = "Total de pontos do jogador: " + placarJogador;
-    document.getElementById('placar-cpu').textContent = "Total de pontos do Gon: " + placarCpu;
-    document.getElementById('placar-empate').textContent = "Total de empates: " + placarDraw;
+    document.getElementById("placar-jogador").textContent = "Total de pontos do jogador: " + placarJogador;
+    document.getElementById("placar-cpu").textContent = "Total de pontos do Gon: " + placarCpu;
+    document.getElementById("placar-empate").textContent = "Total de empates: " + placarDraw;
 }
 
 function atualizarSerieInfo() {
-
     const needed = neededToWin();
     if (!needed) {
-        serieInfo.textContent = '';
+        serieInfo.textContent = "";
         return;
     }
-
     serieInfo.textContent = `Série: Você ${serieJogador} x ${serieCpu} Gon`;
-
 }
 
 function setLocked(value) {
@@ -126,7 +116,8 @@ function setLocked(value) {
 function resetSerie() {
     serieJogador = 0;
     serieCpu = 0;
-    resultSerie.textContent = '';
+    resultSerie.textContent = "";
+    resultSerie.className = "muted";
     setLocked(false);
     atualizarSerieInfo();
 }
@@ -136,8 +127,10 @@ function reset() {
     placarCpu = 0;
     placarDraw = 0;
     result.textContent = "";
+    result.className = "";
     resultSub.textContent = "";
     resultSerie.textContent = "";
+    resultSerie.className = "muted";
     setLocked(false);
     atualizarPlacar();
     atualizarSerieInfo();
@@ -150,62 +143,54 @@ function setMode(newMode) {
 }
 
 function showResult(playerChoice) {
-
     if (locked) return;
 
     const random = generateRandom();
     const resultado = calculeResult(playerChoice, random);
 
-    console.log(random);
-    console.log(playerChoice);
+    if (resultado === "Vitória") placarJogador++;
+    else if (resultado === "Empate") placarDraw++;
+    else placarCpu++;
 
-    if (resultado === "Vitória"){
-        placarJogador++;
-    }
-    else if (resultado === "Empate"){
-        placarDraw++
-    }
-    else {
-        placarCpu++;
-    }
     result.textContent = resultado;
+    result.className = "result-highlight " + resultInfo(resultado).className;
     resultSub.textContent = `Você: ${EMOJIS[playerChoice]} ${playerChoice} | Gon: ${EMOJIS[random]} ${random}`;
 
     const needed = neededToWin();
 
-    if (needed && resultado !== 'Empate') {
-
-        if (resultado === 'Vitória') serieJogador++;
+    if (needed && resultado !== "Empate") {
+        if (resultado === "Vitória") serieJogador++;
         else serieCpu++;
 
         let serieWinner = null;
-        if (serieJogador >= needed) serieWinner = 'player';
-        else if (serieCpu >= needed) serieWinner = 'cpu';
+        if (serieJogador >= needed) serieWinner = "player";
+        else if (serieCpu >= needed) serieWinner = "cpu";
 
         if (serieWinner) {
-
-            resultSerie.textContent = serieWinner === 'player'
-                ? 'Você venceu a série!'
-                : 'Gon venceu a série!';
+            if (serieWinner === "player") {
+                resultSerie.textContent = "Você venceu a série!";
+                resultSerie.className = "result-highlight win";
+            } else {
+                resultSerie.textContent = "Gon venceu a série!";
+                resultSerie.className = "result-highlight lose";
+            }
             setLocked(true);
             setTimeout(() => resetSerie(), 2200);
-
         }
-
     }
 
     incrementHistory(playerChoice, random, resultado);
     renderHistory();
     atualizarPlacar();
     atualizarSerieInfo();
-
 }
 
-btnPaper.addEventListener("click", () => showResult('Papel'));
-btnRock.addEventListener("click", () => showResult('Pedra'));
-btnScissor.addEventListener("click", () => showResult('Tesoura'));
+btnPaper.addEventListener("click", () => showResult("Papel"));
+btnRock.addEventListener("click", () => showResult("Pedra"));
+btnScissor.addEventListener("click", () => showResult("Tesoura"));
 btnReset.addEventListener("click", () => reset());
 btnNormalMode.addEventListener("click", () => setMode(gameMode[0]));
 btn3Mode.addEventListener("click", () => setMode(gameMode[1]));
 btn5Mode.addEventListener("click", () => setMode(gameMode[2]));
 
+reset();
